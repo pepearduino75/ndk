@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: upfo-async-cleanup-config
+data:
+  config: |
+    {
+      "app_configs": [
+        {
+          "app_name": "",
+          "source_namespace": ""
+        }
+      ]
+    }

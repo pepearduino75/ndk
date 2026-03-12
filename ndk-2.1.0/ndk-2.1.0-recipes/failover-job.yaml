@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ndk-failover-job
+spec:
+  activeDeadlineSeconds: 21600 # 6 hours, estimate for multiple apps
+  template:
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - name: ndk-dr-container
+        image: # <image-repo-url>:<tag>
+        args:
+        - -op_name=failover
+        volumeMounts:
+        - name: source-secret-volume
+          mountPath: /app/source.kubeconfig
+          subPath: config
+        - name: target-secret-volume
+          mountPath: /app/target.kubeconfig
+          subPath: config
+        - name: config-volume
+          mountPath: /app/config.json
+          subPath: config
+        - name: ndk-secondary-pc-creds-volume
+          mountPath: /app/secondary-pc-creds
+        securityContext:
+          allowPrivilegeEscalation: false
+      imagePullSecrets:
+        - name: # <image-pull-secret-name>
+      restartPolicy: Never
+      volumes:
+      - name: config-volume
+        configMap:
+          name: failover-config
+      - name: source-secret-volume
+        secret:
+          secretName: source-kubeconfig-secret
+      - name: target-secret-volume
+        secret:
+          secretName: target-kubeconfig-secret
+      - name: ndk-secondary-pc-creds-volume
+        secret:
+          secretName: ndk-failover-secondary-pc-creds
+          optional: true
+  backoffLimit: 0

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ndk-failover-primary-pc-creds
+type: Opaque
+stringData:
+  # ============================================================
+  # Choose ONE of the following authentication formats:
+  # ============================================================
+
+  # OPTION 1: Basic Auth (username/password)
+  # -----------------------------------------
+  # Uncomment the following line and set your credentials:
+  # key: "10.0.0.100:9440:admin:mypassword"
+  # Format: host:port:username:password
+
+  # OPTION 2: Service Auth (API key)
+  # -----------------------------------------
+  # Uncomment the following lines and set your values:
+  # host: "10.0.0.100"
+  # port: "9440"
+  # auth_type: "service-auth"
+  # key_value: "<your-api-key>"
+  # key_type: "api-key"

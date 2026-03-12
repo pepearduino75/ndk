@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restore-config
+data:
+  # application selectors for the app
+  # should follow convention from:
+  # https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Data-Services-for-Kubernetes-v1_2:top-app-cr-manual-create-cli-k8s-t.html
+  config: |
+    {
+      "app_configs": [
+        {
+          "source_namespace": "",
+          "target_namespace": "",
+          "replication_target_name": "",
+          "app_name": "",
+          "app_snapshot_name": "", # optional: specify the latest ready to use snapshot on target for restore
+                                   # use this option when failover fails with 'snapshot is not the latest snapshot for volume' error on the ApplicationSnapshotRestore object.
+        }
+      ]
+    }

@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ndk-upfo-async-cleanup-job
+spec:
+  activeDeadlineSeconds: 21600 # 6 hours, estimate for multiple apps
+  template:
+    spec:
+      containers:
+      - name: ndk-dr-container
+        image: # <image-name>
+        args:
+        - -op_name=upfo_async_cleanup
+        volumeMounts:
+        - name: source-secret-volume
+          mountPath: /app/source.kubeconfig
+          subPath: config
+        - name: config-volume
+          mountPath: /app/config.json
+          subPath: config
+      imagePullSecrets:
+        - name: # <image-pull-secret-name>
+      restartPolicy: Never
+      volumes:
+      - name: config-volume
+        configMap:
+          name: upfo-async-cleanup-config
+      - name: source-secret-volume
+        secret:
+          secretName: source-kubeconfig-secret
+  backoffLimit: 0 # no restart on failure

@@ -1,0 +1,9 @@
+apiVersion: dataservices.nutanix.com/v1alpha1
+kind: ApplicationSnapshot
+metadata:
+  name: manual-sync-fix-01
+  namespace: testdr
+spec:
+  source:
+    name: testdr-application  # Il nome della tua Application attiva
+    kind: Application

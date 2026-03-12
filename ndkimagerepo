@@ -1,0 +1,6 @@
+
+10.161.46.142/ndk/ndk/infra-manager:2.1.0
+10.161.46.142/ndk/ndk/job-scheduler:2.1.0
+10.161.46.142/ndk/ndk/kube-rbac-proxy:v0.20.1
+10.161.46.142/ndk/ndk/kubectl:v1.32.3
+10.161.46.142/ndk/ndk/manager:2.1.0

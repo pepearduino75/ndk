@@ -1,0 +1,7 @@
+apiVersion: dataservices.nutanix.com/v1alpha1
+kind: AppPlannedFailover
+metadata:
+  name: testdr-application-pfo
+  namespace: testdr
+spec:
+  applicationName: testdr-application

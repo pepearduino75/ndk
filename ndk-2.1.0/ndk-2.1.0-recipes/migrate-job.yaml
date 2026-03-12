@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ndk-migrate-job
+  namespace: testdr
+spec:
+  activeDeadlineSeconds: 21600 # 6 hours, estimate for multiple apps
+  template:
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - name: ndk-dr-container
+        image: 10.161.46.142/ndk/ndk/recipes:2.1.0
+        args:
+        - -op_name=migrate
+        volumeMounts:
+        - name: source-secret-volume
+          mountPath: /app/source.kubeconfig
+          subPath: config
+        - name: target-secret-volume
+          mountPath: /app/target.kubeconfig
+          subPath: config
+        - name: config-volume
+          mountPath: /app/config.json
+          subPath: config
+        - name: ndk-primary-pc-creds-volume
+          mountPath: /app/primary-pc-creds
+        - name: ndk-secondary-pc-creds-volume
+          mountPath: /app/secondary-pc-creds
+        securityContext:
+          allowPrivilegeEscalation: false
+      imagePullSecrets:
+        - name: # <image-pull-secret-name>
+      restartPolicy: Never
+      volumes:
+      - name: config-volume
+        configMap:
+          name: migrate-config
+      - name: source-secret-volume
+        secret:
+          secretName: source-kubeconfig-secret
+      - name: target-secret-volume
+        secret:
+          secretName: target-kubeconfig-secret
+      - name: ndk-primary-pc-creds-volume
+        secret:
+          secretName: ndk-failover-primary-pc-creds
+          optional: true
+      - name: ndk-secondary-pc-creds-volume
+        secret:
+          secretName: ndk-failover-secondary-pc-creds
+          optional: true
+  backoffLimit: 0 # no restart on failure

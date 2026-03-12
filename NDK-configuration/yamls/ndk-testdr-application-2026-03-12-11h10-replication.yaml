@@ -1,0 +1,8 @@
+apiVersion: dataservices.nutanix.com/v1alpha1
+kind: ApplicationSnapshotReplication
+metadata:
+  name: testdr-application-2026-03-12-11h10-replication
+  namespace: testdr
+spec:
+  applicationSnapshotName: testdr-application-2026-03-12-11h10
+  replicationTargetName: replication-prod-remote

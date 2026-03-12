@@ -1,0 +1,11 @@
+apiVersion: dataservices.nutanix.com/v1alpha1
+kind: AppProtectionPlan
+metadata:
+  name: testdr-application-protection-plan
+  namespace: testdr
+spec:
+  applicationName: testdr-application
+  labels:
+    appName: testdr-application
+  protectionPlanNames:
+    - testdr-sync-protection-plan

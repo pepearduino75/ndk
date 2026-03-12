@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: failover-config
+data:
+  config: |
+    {
+      "app_configs": [
+        {
+          "target_namespace": "",
+          "app_pplan_name": "",
+          "app_name": "", # optional
+          "app_pplan_uid": "", # optional
+          "app_snapshot_name": "", # use this for out of band snapshot. 
+        }
+      ]
+    }
