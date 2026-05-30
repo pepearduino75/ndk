@@ -1,7 +1,0 @@
-apiVersion: dataservices.nutanix.com/v1alpha1
-kind: AppUnplannedFailover
-metadata:
-  name: testdr-application-upfo
-  namespace: testdr
-spec:
-  applicationName: testdr-application

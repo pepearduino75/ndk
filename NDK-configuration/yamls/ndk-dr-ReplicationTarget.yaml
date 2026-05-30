@@ -1,9 +1,0 @@
-apiVersion: dataservices.nutanix.com/v1alpha1
-kind: ReplicationTarget
-metadata:
-  name: replication-prod-remote
-  namespace: testdr
-spec:
-  namespaceName: testdr
-  remoteName: prod-remote
-  serviceAccountName: default

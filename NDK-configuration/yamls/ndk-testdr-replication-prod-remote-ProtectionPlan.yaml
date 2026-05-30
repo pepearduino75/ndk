@@ -1,9 +1,0 @@
-apiVersion: dataservices.nutanix.com/v1alpha1
-kind: ProtectionPlan
-metadata:
-  name: testdr-sync-protection-plan
-  namespace: testdr
-spec:
-  protectionType: sync
-  replicationConfigs:
-    - replicationTargetName: replication-prod-remote

@@ -73,7 +73,8 @@ spec:
   source:
     applicationRef:
       name: $APPNAME 
-  expiresAfter: 240m"
+  expiresAfter: 240m
+  forceDeleteFilesSnapshot: true"
 
 YAMLFILE=./yamls/appsnapshot-$APPNAME.yaml
 
